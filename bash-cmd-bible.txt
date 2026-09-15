@@ -1,0 +1,644 @@
+============================================================
+                    BASH COMMAND BIBLE
+============================================================
+
+A personal command reference for Linux / WSL / Foundry
+
+NOTE:
+Bash commands are not magic words. Most commands follow this
+basic structure:
+
+    command    options    arguments
+      |          |           |
+      |          |           └── What the command operates on
+      |          └────────────── Optional modifications
+      └───────────────────────── What I want Bash to do
+
+
+============================================================
+1. KNOW WHERE I AM
+============================================================
+
+pwd
+    Print Working Directory.
+    Shows the directory I am currently inside.
+
+Example:
+    pwd
+
+Output:
+    /home/user/first-Foundry-Simple-Storage
+
+
+ls
+    List files and folders in the current directory.
+
+Example:
+    ls
+
+
+ls -la
+    List everything, including hidden files.
+    -l = long/detailed format
+    -a = all files
+
+
+============================================================
+2. MOVE AROUND THE FILESYSTEM
+============================================================
+
+cd folder-name
+    Change Directory.
+    Moves into a folder.
+
+Example:
+    cd contracts
+
+
+cd ..
+    Move up one directory.
+
+Example:
+
+    /home/user/project/contracts
+
+    cd ..
+
+    /home/user/project
+
+
+cd ~
+    Go to my home directory.
+
+Example:
+    cd ~
+
+Usually takes me to:
+    /home/user
+
+
+cd /
+    Go to the root of the Linux filesystem.
+
+
+cd -
+    Return to the previous directory.
+
+
+IMPORTANT:
+    pwd = Where am I?
+    ls  = What's here?
+    cd  = Take me somewhere else.
+
+
+============================================================
+3. CREATE FOLDERS AND FILES
+============================================================
+
+mkdir folder-name
+    Make Directory.
+    Creates a new folder.
+
+Example:
+    mkdir contracts
+
+
+mkdir -p folder/subfolder
+    Creates the whole directory path if necessary.
+
+Example:
+    mkdir -p src/contracts
+
+
+touch filename
+    Creates an empty file.
+
+Example:
+    touch hi.txt
+
+Example:
+    touch SimpleStorage.sol
+
+
+============================================================
+4. MOVE OR RENAME FILES
+============================================================
+
+mv old-name new-name
+    Move or rename a file/folder.
+
+Rename:
+    mv hi.txt bash-cmd-bible.txt
+
+Move:
+    mv SimpleStorage.sol contracts/
+
+
+============================================================
+5. COPY FILES
+============================================================
+
+cp original.txt copy.txt
+    Copies a file.
+
+Example:
+    cp SimpleStorage.sol SimpleStorageBackup.sol
+
+
+cp -r folder1 folder2
+    Copies a folder and its contents.
+
+-r = recursive
+
+
+============================================================
+6. DELETE FILES AND FOLDERS
+============================================================
+
+rm filename
+    Delete a file.
+
+Example:
+    rm hi.txt
+
+
+rmdir folder-name
+    Delete an EMPTY directory.
+
+
+rm -r folder-name
+    Delete a directory and everything inside it.
+
+-r = recursive
+
+
+WARNING:
+    rm does not normally send things to a Recycle Bin.
+    Be careful before using it.
+
+
+============================================================
+7. READ FILES
+============================================================
+
+cat filename
+    Prints the contents of a file in the terminal.
+
+Example:
+    cat bash-cmd-bible.txt
+
+
+less filename
+    Opens a file for easier reading, especially large files.
+
+Press:
+    q = quit
+
+
+head filename
+    Shows the beginning of a file.
+
+
+tail filename
+    Shows the end of a file.
+
+
+============================================================
+8. TERMINAL CONTROL
+============================================================
+
+clear
+    Clears the terminal screen.
+
+
+Ctrl + L
+    Another way to clear the terminal screen.
+
+
+Ctrl + C
+    Interrupt/stop a currently running command.
+
+VERY IMPORTANT:
+    If a command is running and I want to stop it,
+    try Ctrl + C first.
+
+
+Tab
+    Autocomplete commands, filenames and folder names.
+
+Example:
+    cd fir<Tab>
+
+May autocomplete to:
+    cd first-Foundry-Simple-Storage
+
+
+Up Arrow
+    Shows previous commands.
+
+Down Arrow
+    Move forward through command history.
+
+
+============================================================
+9. FINDING FILES AND TEXT
+============================================================
+
+find . -name "filename"
+    Search for a file starting from the current directory.
+
+Example:
+    find . -name "SimpleStorage.sol"
+
+
+grep "text" filename
+    Search for text inside a file.
+
+Example:
+    grep "contract" SimpleStorage.sol
+
+
+============================================================
+10. USEFUL INFORMATION COMMANDS
+============================================================
+
+which command
+    Shows where a command is installed.
+
+Example:
+    which forge
+
+Possible result:
+    /home/user/.foundry/bin/forge
+
+
+command --version
+    Shows the installed version of a command.
+
+Examples:
+    forge --version
+    git --version
+    code --version
+
+
+history
+    Shows previously entered commands.
+
+
+============================================================
+11. SUDO
+============================================================
+
+sudo command
+    Runs a command with administrator/root privileges.
+
+Example:
+    sudo apt update
+
+
+IMPORTANT:
+    Do NOT automatically add sudo when a command fails.
+
+sudo gives a command elevated privileges, so understand
+what the command is doing before using it.
+
+
+============================================================
+12. UBUNTU PACKAGE MANAGEMENT
+============================================================
+
+sudo apt update
+    Updates Ubuntu's package information.
+
+sudo apt upgrade
+    Upgrades installed packages.
+
+sudo apt install package-name
+    Installs a package.
+
+Example:
+    sudo apt install git
+
+
+============================================================
+13. PATH
+============================================================
+
+echo $PATH
+    Shows the directories Bash searches when I type a command.
+
+Example:
+    echo $PATH
+
+
+which forge
+    Shows which Forge executable Bash is using.
+
+Example:
+    which forge
+
+Our Foundry installation is located under:
+
+    ~/.foundry/bin/
+
+
+============================================================
+14. SPECIAL SYMBOLS
+============================================================
+
+~
+    My home directory.
+
+Example:
+    cd ~
+
+Usually means:
+    /home/user
+
+
+.
+    The current directory.
+
+Example:
+    ls .
+
+
+..
+    The parent directory.
+
+Example:
+    cd ..
+
+
+/
+    Separates directories.
+
+Example:
+    /home/user/project
+
+
+*
+    Wildcard.
+    Can represent multiple characters.
+
+Example:
+    ls *.sol
+
+Means:
+    Show all files ending in .sol
+
+
+============================================================
+15. FILESYSTEM EXAMPLES
+============================================================
+
+Suppose I have:
+
+    /home/user
+        |
+        └── first-Foundry-Simple-Storage
+                |
+                ├── src
+                ├── test
+                └── SimpleStorage.sol
+
+
+To enter the project:
+
+    cd ~/first-Foundry-Simple-Storage
+
+
+To see what's inside:
+
+    ls
+
+
+To enter src:
+
+    cd src
+
+
+To go back to the project:
+
+    cd ..
+
+
+To go all the way home:
+
+    cd ~
+
+
+============================================================
+16. FOUNDRY COMMANDS
+============================================================
+
+forge
+    Foundry's main development tool.
+
+forge --version
+    Check Forge version.
+
+
+forge init project-name
+    Create a new Foundry project.
+
+Example:
+    forge init my-project
+
+
+forge build
+    Compile the Solidity project.
+
+
+forge test
+    Run the project's tests.
+
+
+forge test -vv
+    Run tests with additional output/detail.
+
+
+forge fmt
+    Format Solidity code.
+
+
+============================================================
+17. CAST
+============================================================
+
+cast
+    Tool for interacting with Ethereum-compatible blockchains
+    and smart contracts from the command line.
+
+
+cast --version
+    Check Cast version.
+
+
+cast --help
+    Show available Cast commands.
+
+
+============================================================
+18. ANVIL
+============================================================
+
+anvil
+    Starts a local Ethereum development blockchain.
+
+Useful for:
+    - Local smart contract testing
+    - Local transactions
+    - Development accounts
+    - Testing deployments
+
+
+anvil --help
+    Show available Anvil options.
+
+
+============================================================
+19. CHISEL
+============================================================
+
+chisel
+    Solidity REPL/playground.
+
+Useful for experimenting with Solidity expressions and
+small pieces of Solidity code without creating a full project.
+
+
+============================================================
+20. VS CODE + WSL
+============================================================
+
+code .
+    Opens the CURRENT DIRECTORY in Visual Studio Code.
+
+Example:
+
+    cd ~/first-Foundry-Simple-Storage
+    code .
+
+This opens the current Foundry project in VS Code.
+
+
+IMPORTANT:
+    VS Code can open a WSL project while its integrated
+    terminal is still PowerShell.
+
+For Linux/Bash commands, make sure the VS Code terminal
+is using Ubuntu/WSL/Bash.
+
+Correct:
+
+    user@Meekz-book:~/first-Foundry-Simple-Storage$
+
+
+PowerShell:
+
+    PS Microsoft.PowerShell.Core\FileSystem::...
+
+
+If I see:
+
+    PS
+
+I am probably in PowerShell, not Bash.
+
+
+============================================================
+21. COMMON BEGINNER COMMANDS
+============================================================
+
+If I forget everything else, remember:
+
+    pwd
+        Where am I?
+
+    ls
+        What's here?
+
+    cd folder
+        Go into a folder.
+
+    cd ..
+        Go up one level.
+
+    cd ~
+        Go home.
+
+    mkdir folder
+        Create a folder.
+
+    touch file.txt
+        Create a file.
+
+    mv old new
+        Rename/move something.
+
+    cp old new
+        Copy something.
+
+    rm file
+        Delete a file.
+
+    cat file
+        Read a file.
+
+    clear
+        Clear the terminal.
+
+    Ctrl + C
+        Stop a running command.
+
+
+============================================================
+22. MY MOST IMPORTANT MENTAL MODEL
+============================================================
+
+Bash commands are usually:
+
+    COMMAND + OPTIONS + ARGUMENTS
+
+Example:
+
+    ls -la
+
+    ls      = command
+    -la     = options
+
+
+Another example:
+
+    mkdir contracts
+
+    mkdir       = command
+    contracts   = argument
+
+
+Another example:
+
+    cd ~/first-Foundry-Simple-Storage
+
+    cd                          = command
+    ~/first-Foundry-Simple-Storage = argument
+
+
+Do not try to memorize everything.
+
+When learning a new command, ask:
+
+    1. What does the command do?
+    2. What does each option mean?
+    3. What argument does it operate on?
+    4. Can I safely experiment with it?
+
+
+============================================================
+                    END OF BASH BIBLE
+============================================================
+
+This document is a living reference.
+Add new commands and explanations as I encounter them.
+============================================================
